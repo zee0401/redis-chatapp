@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function HeroSection() {
   return (
@@ -21,7 +21,7 @@ export default function HeroSection() {
 
       <div className="mt-12 w-full max-w-5xl flex justify-center">
         {/* Placeholder for Illustration/Image */}
-        <Image
+        <img
           src="/images/conversation.svg"
           alt="Illustration"
           className="w-full h-auto"
