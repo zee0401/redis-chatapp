@@ -2,10 +2,8 @@
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -29,23 +27,20 @@ const AuthModal = () => {
             to create and join chat rooms with ease.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogAction>
-            Cancel
-            <Image
-              src="/images/google.png"
-              alt="google"
-              width={25}
-              height={25}
-              className="mr-4 "
-            />
-          </AlertDialogAction>
-          continue with Google
-        </AlertDialogFooter>
+
+        <Button>
+          <Image
+            src="/images/google.png"
+            alt="google"
+            width={25}
+            height={25}
+            className="mr-4"
+          />
+          Continue with Google
+        </Button>
       </AlertDialogContent>
     </AlertDialog>
   );
-  x;
 };
 
 export default AuthModal;
