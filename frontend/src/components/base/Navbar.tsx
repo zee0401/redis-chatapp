@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Button } from "../ui/button";
 import LoginModal from "../auth/AuthModal";
-import { CustomUser } from "@/app/api/auth/[...nextAuth]/options";
+import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 
 export default function Navbar({ user }: { user: CustomUser | null }) {
   return (

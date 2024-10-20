@@ -9,9 +9,17 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 
 const AuthModal = () => {
+  const handleLogin = () => {
+    signIn("google", {
+      callbackUrl: "/dashboard",
+      redirect: true,
+    });
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -28,7 +36,7 @@ const AuthModal = () => {
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        <Button>
+        <Button onClick={handleLogin}>
           <Image
             src="/images/google.png"
             alt="google"
