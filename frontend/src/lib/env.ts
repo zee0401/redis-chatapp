@@ -1,4 +1,6 @@
-export const env = {
-  API_URL: process.env.NEXT_PUBLIC_APP_URL,
-  BACKEND_URL: process.env.NEXT_PUBLIC_Ba_URL,
-};
+class Env {
+  static APP_URL: string = process.env.NEXT_PUBLIC_APP_URL as string;
+  static BACKEND_URL: string = process.env.NEXT_PUBLIC_BACKEND_URL as string;
+}
+
+export default Env;
