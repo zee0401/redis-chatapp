@@ -10,7 +10,7 @@ interface LoginPayload {
   oauth_id: string;
 }
 
-export const createUser = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
   try {
     const body: LoginPayload = req.body;
 
@@ -21,26 +21,28 @@ export const createUser = async (req: Request, res: Response) => {
     });
 
     if (!findUser) {
-      const user = await prisma.user.create({
-        data: {
-          name: body.name,
-          email: body.email,
-          image: body.image,
-          provider: body.provider,
-          oauth_id: body.oauth_id,
-        },
+      const createUser = await prisma.user.create({
+        data: body,
       });
     }
 
     let jwtPayload = {
       name: body.name,
       email: body.email,
-      image: body.image,
-      provider: body.provider,
-      oauth_id: body.oauth_id,
+      id: findUser.id,
     };
-    const token = await jwt.sign(jwtPayload, process.env.JWT_SECRET as string);
+    const token = await jwt.sign(jwtPayload, process.env.JWT_SECRET, {
+      expiresIn: "365d",
+    });
+
+    return res.status(200).json({
+      message: "Logged in Successfully",
+      user: {
+        ...findUser,
+        token: `Bearer ${token}`,
+      },
+    });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
