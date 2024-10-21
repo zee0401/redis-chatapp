@@ -14,14 +14,14 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const body: LoginPayload = req.body;
 
-    const findUser = await prisma.user.findUnique({
+    let findUser = await prisma.user.findUnique({
       where: {
         email: body.email,
       },
     });
 
     if (!findUser) {
-      const createUser = await prisma.user.create({
+      findUser = await prisma.user.create({
         data: body,
       });
     }
@@ -43,6 +43,8 @@ export const loginUser = async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    return res
+      .status(500)
+      .json({ message: "Something went wrong.please try again!" });
   }
 };

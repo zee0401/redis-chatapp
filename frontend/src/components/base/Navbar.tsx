@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 
 import { Button } from "../ui/button";
-import LoginModal from "../auth/AuthModal";
+import LoginModal from "../auth/LoginModal";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 
 export default function Navbar({ user }: { user: CustomUser | null }) {
