@@ -1,4 +1,4 @@
-import { Account, AuthOptions, ISODateString, User } from "next-auth";
+import { Account, AuthOptions, ISODateString } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
@@ -40,7 +40,7 @@ export const authOptions: AuthOptions = {
         };
         const { data } = await axios.post(LOGIN_URL, payload);
 
-        user.id = data?.user.id.toString();
+        user.id = data?.user?.id.toString();
         user.token = data?.user?.token;
         user.provider = data?.user?.provider;
         return true;
@@ -55,8 +55,8 @@ export const authOptions: AuthOptions = {
       token,
     }: {
       session: CustomSession;
-      user: CustomUser;
       token: JWT;
+      user: CustomUser;
     }) {
       session.user = token.user as CustomUser;
       return session;
@@ -71,7 +71,7 @@ export const authOptions: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
-      clientSecret: process.env.GOOGLE_SECRET!,
+      clientSecret: process.env.GOOGLE_SECRET as string,
       authorization: {
         params: {
           prompt: "consent",
