@@ -14,14 +14,28 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String   @db.VarChar(255)
-  email     String   @unique @db.VarChar(255)
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(255)
+  email     String      @unique @db.VarChar(255)
   image     String?
-  provider  String?  @db.VarChar(255)
-  oauth_id  String?  @db.VarChar(255)
-  updatedAt DateTime @updatedAt
-  createdAt DateTime @default(now())
+  provider  String?     @db.VarChar(255)
+  oauth_id  String?     @db.VarChar(255)
+  updatedAt DateTime    @updatedAt
+  createdAt DateTime    @default(now())
+  ChatGroup ChatGroup[]
 
   @@map("users")
+}
+
+model ChatGroup {
+  id        String   @id @default(uuid()) @db.Uuid
+  user      User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id   Int
+  title     String   @db.VarChar(255)
+  passcode  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@map("chat_groups")
 }
