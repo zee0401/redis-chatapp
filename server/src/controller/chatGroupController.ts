@@ -83,3 +83,19 @@ export const chatGroupupdate = async (req: Request, res: Response) => {
       .json({ message: "Something went wrong.please try again!" });
   }
 };
+
+export const chatGroupDestroy = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    await prisma.chatGroup.delete({
+      where: {
+        id: id,
+      },
+    });
+    return res.json({ message: "Chat Deleted successfully!" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong.please try again!" });
+  }
+};
