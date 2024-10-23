@@ -41,3 +41,23 @@ export const chatGroupIndex = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const chatGroupShow = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    if (id) {
+      const group = await prisma.chatGroup.findUnique({
+        where: {
+          id: id,
+        },
+      });
+      return res.json({ data: group });
+    }
+
+    return res.status(404).json({ message: "No groups found" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong.please try again!" });
+  }
+};
