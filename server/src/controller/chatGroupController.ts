@@ -61,3 +61,25 @@ export const chatGroupShow = async (req: Request, res: Response) => {
       .json({ message: "Something went wrong.please try again!" });
   }
 };
+
+export const chatGroupupdate = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    if (id) {
+      await prisma.chatGroup.update({
+        data: body,
+        where: {
+          id: id,
+        },
+      });
+      return res.json({ message: "Group updated successfully!" });
+    }
+
+    return res.status(404).json({ message: "No groups found" });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong.please try again!" });
+  }
+};
