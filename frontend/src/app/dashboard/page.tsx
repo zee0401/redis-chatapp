@@ -10,7 +10,6 @@ import CreateChat from "@/components/groupChat/CreateChat";
 const dashboard = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);
 
-  console.log(session);
   return (
     <div>
       <DashNav
@@ -19,7 +18,7 @@ const dashboard = async () => {
       />
       <div className="container">
         <div className="mt-6 text-end">
-          <CreateChat />
+          <CreateChat user={session?.user!} />
         </div>
       </div>
     </div>

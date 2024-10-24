@@ -15,14 +15,14 @@ const router = Router();
 router.post("/auth/login", loginUser);
 
 //chat group
-router.post("/chatgroup", authMiddleware, chatGroupStore);
+router.post("/chat-group", authMiddleware, chatGroupStore);
 
-router.get("/chatgroup/:id", authMiddleware, chatGroupShow);
+router.get("/chat-group/:id", authMiddleware, chatGroupShow);
 
-router.get("/chatgroup", authMiddleware, chatGroupIndex);
+router.get("/chat-group", authMiddleware, chatGroupIndex);
 
-router.put("/chatgroup/:id", authMiddleware, chatGroupupdate);
+router.put("/chat-group/:id", authMiddleware, chatGroupupdate);
 
-router.delete("/chatgroup/:id", authMiddleware, chatGroupDestroy);
+router.delete("/chat-group/:id", authMiddleware, chatGroupDestroy);
 
 export default router;
