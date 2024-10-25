@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import axios from "axios";
-import { CHAT_GROUP } from "@/lib/apiAuthRoutes";
+import { CHAT_GROUP } from "@/lib/apiEndPoints";
 import { toast } from "sonner";
 import { clearCache } from "@/actions/common";
 
@@ -43,6 +43,7 @@ export default function DeleteChatGroup({
     } catch (error) {
       setLoading(false);
       toast.error("Somethign went wrong.please try again later.");
+      console.log(error);
     }
   };
 

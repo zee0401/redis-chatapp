@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import DashNav from "@/components/DashNav";
 import React from "react";
 import { getServerSession } from "next-auth";
@@ -8,13 +9,15 @@ import {
 import CreateChat from "@/components/groupChat/CreateChat";
 import { chatGroupType } from "../../types";
 import { fetchChatGroups } from "../fetch/fetchChatGroup";
+import GroupChatCard from "@/components/groupChat/groupChatCard";
 
 const dashboard = async () => {
   const session: CustomSession | null = await getServerSession(authOptions);
 
   const groups: Array<chatGroupType> | [] = await fetchChatGroups(
-    session?.user?.token
+    session?.user?.token!
   );
+
   return (
     <div>
       <DashNav

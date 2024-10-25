@@ -2,12 +2,13 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 import GroupChatCardMenu from "./GroupChatCardMenu";
+import { chatGroupType } from "@/types";
 
 export default function GroupChatCard({
   group,
   user,
 }: {
-  group: GroupChatType;
+  group: chatGroupType;
   user: CustomUser;
 }) {
   return (
@@ -20,7 +21,7 @@ export default function GroupChatCard({
         <p>
           Passcode :-<strong>{group.passcode}</strong>
         </p>
-        <p>Created At :-{new Date(group.created_at).toDateString()}</p>
+        <p>Created At :-{new Date(group.createdAt).toDateString()}</p>
       </CardContent>
     </Card>
   );

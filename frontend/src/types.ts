@@ -1,7 +1,7 @@
-export interface chatGroupType {
+export type chatGroupType = {
   id: string;
   user_id: number;
   passcode: string;
   title: string;
-  created_at: string;
-}
+  createdAt: string;
+};

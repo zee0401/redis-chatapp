@@ -14,12 +14,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   createChatSchema,
   createChatSchemaType,
-} from "@/validations/chatSchema";
+} from "@/app/Validations/chatSchema";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
 import axios, { AxiosError } from "axios";
-import { CHAT_GROUP } from "@/lib/apiAuthRoutes";
+import { CHAT_GROUP } from "@/lib/apiEndPoints";
 import { toast } from "sonner";
 import { clearCache } from "@/actions/common";
+import { chatGroupType } from "@/types";
 
 export default function EditGroupChat({
   user,
@@ -28,7 +29,7 @@ export default function EditGroupChat({
   setOpen,
 }: {
   user: CustomUser;
-  group: GroupChatType;
+  group: chatGroupType;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
