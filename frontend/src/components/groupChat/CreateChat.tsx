@@ -21,6 +21,7 @@ import { AxiosError } from "axios";
 import axios from "axios";
 import { CHAT_GROUP } from "@/lib/apiEndPoints";
 import { CustomUser } from "@/app/api/auth/[...nextauth]/options";
+import { clearCache } from "@/actions/common";
 
 export default function CreateChat({ user }: { user: CustomUser }) {
   const [open, setOpen] = useState(false);
@@ -44,6 +45,7 @@ export default function CreateChat({ user }: { user: CustomUser }) {
       });
 
       if (response?.data?.message) {
+        clearCache("dashboard");
         setOpen(false);
         toast.success("Chat created successfully");
         setLoading(false);
