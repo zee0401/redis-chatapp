@@ -1,7 +1,24 @@
-export type chatGroupType = {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+type ChatGroupType = {
   id: string;
   user_id: number;
-  passcode: string;
   title: string;
-  createdAt: string;
+  passcode: string;
+  created_at: string;
+};
+
+type GroupChatUserType = {
+  id: number;
+  name: string;
+  group_id: string;
+  created_at: string;
+  isOnline?: boolean;
+};
+
+type MessageType = {
+  id: string;
+  message: string;
+  group_id: string;
+  name: string;
+  created_at: string;
 };
