@@ -9,15 +9,31 @@ const PORT = process.env.PORT || 7000;
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { socketConnect } from "./socket.js";
+import { createAdapter } from "@socket.io/redis-streams-adapter";
+import { redis } from "./config/redis.config.js";
+
+import { instrument } from "@socket.io/admin-ui";
 
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "http://localhost:8000",
+      "http://localhost:3000",
+      "https://admin.socket.io",
+    ],
     methods: ["GET", "POST"],
+    credentials: true,
   },
+  adapter: createAdapter(redis),
 });
+instrument(io, {
+  auth: false,
+  mode: "development",
+});
+
 socketConnect(io);
+
 export { io };
 
 // * Middleware
