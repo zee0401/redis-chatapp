@@ -6,7 +6,7 @@ const chat = ({ params }: { params: { id: string } }) => {
 
   return (
     <div>
-      <ChatContainer />
+      <ChatContainer groupId={params.id} />
     </div>
   );
 };

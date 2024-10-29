@@ -4,10 +4,15 @@ import { connectSocket } from "@/lib/socket.config";
 import { Button } from "../ui/button";
 import { v4 as uuidv4 } from "uuid";
 
-const ChatContainer = () => {
+const ChatContainer = ({ groupId }: { groupId: string }) => {
   // Initialize socket once
   const socket = useMemo(() => {
     const socket = connectSocket();
+
+    socket.auth = {
+      room: groupId,
+    };
+
     return socket.connect();
   }, []);
 
