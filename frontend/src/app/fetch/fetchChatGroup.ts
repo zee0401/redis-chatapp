@@ -1,4 +1,4 @@
-import { CHAT_GROUP } from "@/lib/apiEndPoints";
+import { CHAT_GROUP, CHATS_URL } from "@/lib/apiEndPoints";
 
 export const fetchChatGroups = async (token: string) => {
   if (!token) {
@@ -18,4 +18,18 @@ export const fetchChatGroups = async (token: string) => {
   const responseData = await response.json();
 
   return responseData.data ?? [];
+};
+
+export const fetchChatGroup = async (id: string) => {
+  const response = await fetch(`${CHATS_URL}/${id}`, {
+    cache: "no-cache",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch chat");
+  }
+
+  const responseData = await response.json();
+
+  return responseData.data ?? null;
 };
