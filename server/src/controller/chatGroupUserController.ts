@@ -1,6 +1,11 @@
 import { Response, Request } from "express";
 import prisma from "../config/db.config.js";
 
+interface GroupChatUserTpe {
+  name: string;
+  group_id: string;
+}
+
 export const chatGroupUserIndex = async (req: Request, res: Response) => {
   try {
     const { group_id } = req.query;
@@ -19,7 +24,7 @@ export const chatGroupUserIndex = async (req: Request, res: Response) => {
 
 export const chatGroupUserCreate = async (req: Request, res: Response) => {
   try {
-    const body = req.body;
+    const body: GroupChatUserTpe = req.body;
     const user = await prisma.groupUsers.create({
       data: body,
     });
