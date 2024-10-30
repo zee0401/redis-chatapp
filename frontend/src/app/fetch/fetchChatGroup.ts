@@ -1,10 +1,10 @@
-import { CHAT_GROUP, CHATS_URL } from "@/lib/apiEndPoints";
+import { CHAT_GROUP_URL, CHAT_GROUP_USERS_URL } from "@/lib/apiEndPoints";
 
 export const fetchChatGroups = async (token: string) => {
   if (!token) {
     throw new Error("Authentication token is required");
   }
-  const response = await fetch(CHAT_GROUP, {
+  const response = await fetch(CHAT_GROUP_URL, {
     headers: {
       Authorization: token,
     },
@@ -21,7 +21,7 @@ export const fetchChatGroups = async (token: string) => {
 };
 
 export const fetchChatGroup = async (id: string) => {
-  const response = await fetch(`${CHATS_URL}/${id}`, {
+  const response = await fetch(`${CHAT_GROUP_USERS_URL}/${id}`, {
     cache: "no-cache",
   });
 
