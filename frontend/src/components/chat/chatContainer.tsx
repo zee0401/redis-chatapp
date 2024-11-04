@@ -3,13 +3,16 @@ import React, { useEffect, useState } from "react";
 import ChatSidebar from "./ChatSidebar";
 import ChatNav from "./ChatNav";
 import ChatUserDialog from "./ChatUserDialogue";
+import Chats from "./Chats";
 
 const ChatContainer = ({
   users,
   group,
+  oldMessages,
 }: {
   users: Array<GroupChatUserType>;
   group: ChatGroupType;
+  oldMessages: Array<MessageType>;
 }) => {
   // Initialize socket once
   // const socket = useMemo(() => {
@@ -59,7 +62,7 @@ const ChatContainer = ({
         )}
 
         {/* Messages */}
-        {/* <Chats oldMessages={oldMessages} group={group} chatUser={chatUser} /> */}
+        <Chats oldMessages={oldMessages} group={group} chatUser={chatUser} />
       </div>
     </div>
   );
