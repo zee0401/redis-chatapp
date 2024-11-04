@@ -12,6 +12,7 @@ import {
   chatGroupUserCreate,
   chatGroupUserIndex,
 } from "../controller/chatGroupUserController.js";
+import ChatsController from "../controller/chatsController.js";
 
 const router = Router();
 
@@ -32,5 +33,7 @@ router.delete("/chat-group/:id", authMiddleware, chatGroupDestroy);
 //chat group user
 router.get("/chat-group-users", authMiddleware, chatGroupUserIndex);
 router.post("/chat-group-users", authMiddleware, chatGroupUserCreate);
+
+router.get("/chats/:groupId", ChatsController.index);
 
 export default router;
