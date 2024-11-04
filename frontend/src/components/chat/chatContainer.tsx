@@ -1,40 +1,66 @@
 "use client";
-import React, { useEffect, useMemo, useCallback } from "react";
-import { connectSocket } from "@/lib/socket.config";
-import { Button } from "../ui/button";
-import { v4 as uuidv4 } from "uuid";
+import React, { useEffect, useState } from "react";
+import ChatSidebar from "./ChatSidebar";
+import ChatNav from "./ChatNav";
+import ChatUserDialog from "./ChatUserDialogue";
 
-const ChatContainer = ({ groupId }: { groupId: string }) => {
+const ChatContainer = ({
+  users,
+  group,
+}: {
+  users: Array<GroupChatUserType>;
+  group: ChatGroupType;
+}) => {
   // Initialize socket once
-  const socket = useMemo(() => {
-    const socket = connectSocket();
+  // const socket = useMemo(() => {
+  //   const socket = connectSocket();
 
-    socket.auth = {
-      room: groupId,
-    };
+  //   socket.auth = {
+  //     room: groupId,
+  //   };
 
-    return socket.connect();
-  }, []);
+  //   return socket.connect();
+  // }, []);
 
-  useEffect(() => {
-    socket.on("chat", (data) => {
-      console.log("Client received message: ", data);
-    });
+  // useEffect(() => {
+  //   socket.on("chat", (data) => {
+  //     console.log("Client received message: ", data);
+  //   });
 
-    return () => {
-      socket.close();
-    };
-  }, [socket]);
+  //   return () => {
+  //     socket.close();
+  //   };
+  // }, [socket]);
 
   // Emit a message on button click
-  const handleClick = useCallback(() => {
-    console.log("Button clicked, sending message...");
-    socket.emit("message", { name: "Zeshan", id: uuidv4(), message: "hello" });
-  }, [socket]);
+  // const handleClick = useCallback(() => {
+  //   console.log("Button clicked, sending message...");
+  //   socket.emit("message", { name: "Zeshan", id: uuidv4(), message: "hello" });
+  // }, [socket]);
+
+  const [open, setOpen] = useState(true);
+  const [chatUser, setChatUser] = useState<GroupChatUserType>();
+  useEffect(() => {
+    const data = localStorage.getItem(group.id);
+    if (data) {
+      const pData = JSON.parse(data);
+      setChatUser(pData);
+    }
+  }, [group.id]);
 
   return (
-    <div>
-      <Button onClick={handleClick}>Send Message</Button>
+    <div className="flex">
+      <ChatSidebar users={users} />
+      <div className="w-full md:w-4/5 bg-gradient-to-b from-gray-50 to-white">
+        {open ? (
+          <ChatUserDialog open={open} setOpen={setOpen} group={group} />
+        ) : (
+          <ChatNav chatGroup={group} users={users} user={chatUser} />
+        )}
+
+        {/* Messages */}
+        {/* <Chats oldMessages={oldMessages} group={group} chatUser={chatUser} /> */}
+      </div>
     </div>
   );
 };
